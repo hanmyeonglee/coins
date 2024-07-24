@@ -13,7 +13,7 @@ from time import sleep
 import sys
 
 
-Trader: trader | None = None
+Trader: trader = None
 type_selector = {
     'type01': type01,
     'type02': type02,

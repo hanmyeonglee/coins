@@ -19,7 +19,7 @@ class typ:
         return C.quote_volume
 
     @staticmethod
-    def select_func(coins: list[coin], n: int) -> list[coin]:
+    def select_func(coins: list, n: int) -> list:
         return coins[-n:]
     
     @staticmethod
@@ -87,7 +87,7 @@ class type01(typ):
 
 
     @staticmethod
-    def select_func(coins: list[coin], n: int) -> list[coin]:
+    def select_func(coins: list, n: int) -> list:
         coins = list(filter(lambda x: x.is_dealible(5000000), coins))
         mid = len(coins) // 2
         return coins[mid - n//2 : mid + n//2 + n % 2]
@@ -98,7 +98,7 @@ class type02(typ): pass
 
 class type03(typ):
     @staticmethod
-    def select_func(coins: list[coin], n: int) -> list[coin]:
+    def select_func(coins: list, n: int) -> list:
         for C in coins:
             if C.name == 'BTC':
                 return [C]

@@ -31,9 +31,9 @@ class trader:
         self.name: str = name
         self.balance: float = balance
         self.nof_coins_to_deal_atonce = n
-        self.coins: dict[str, coin] = {}
-        self.coin_names: list[str] = []
-        self.current_dealing_coins: list[coin] = []
+        self.coins: dict = {}
+        self.coin_names: list = []
+        self.current_dealing_coins: list = []
 
 
     def update(self) -> trader:
@@ -74,12 +74,12 @@ class trader:
     def select_coins_and_buy(self, sort_func: function, select_func: function) -> trader:
         nof_dificient_coins = self.nof_coins_to_deal_atonce - len(self.current_dealing_coins)
         
-        sorted_coin_list: list[coin] = list(self.coins.values())
+        sorted_coin_list: list = list(self.coins.values())
         sorted_coin_list.sort(
             key = sort_func
         )
 
-        selected_coins: list[coin] = select_func(sorted_coin_list, nof_dificient_coins)
+        selected_coins: list = select_func(sorted_coin_list, nof_dificient_coins)
 
         for C in selected_coins:
             self.buy(C)

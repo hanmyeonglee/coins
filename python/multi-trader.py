@@ -2,10 +2,7 @@ from requests.exceptions import ConnectionError, ReadTimeout
 from utils.trader import trader
 from utils.log import print
 
-from typ.type import type
-from typ.type01 import type01
-from typ.type02 import type02
-from typ.type03 import type03
+from python.typ.typ import *
 
 import traceback
 from time import sleep

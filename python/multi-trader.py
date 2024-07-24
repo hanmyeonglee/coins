@@ -18,7 +18,7 @@ type_selector = {
 }
 
 
-def main(name:str, balance: float, n: int, main_type: type):
+def main(name:str, balance: float, n: int, main_type: typ):
     global Trader
     Trader = trader(name, balance, n)
     flag = False

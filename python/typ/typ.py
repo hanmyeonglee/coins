@@ -6,7 +6,7 @@ from utils.trader import trader
 from time import sleep
 from random import randint
 
-class type:
+class typ:
 
     profit_ratio = 0.005
     loss_ratio = 0.2
@@ -26,14 +26,14 @@ class type:
     def decide_func(C: coin):
         orderbook = check_request_success(
             requests.get(trader.ORDER_BOOK_CHK % C.name, headers=trader.headers).json(),
-            trader.GET_req_fail % "orderbook of type.decide_func() by err_code [%s].",
+            trader.GET_req_fail % "orderbook of typ.decide_func() by err_code [%s].",
         )
 
         transactions = check_request_success(
             requests.get(trader.LAST_TRANSACTION_CHK % C.name, params={
-                'size': type.TRANS_size,
+                'size': typ.TRANS_size,
             }, headers=trader.headers).json(),
-            trader.GET_req_fail % "transactions of type.decide_func() by err_code [%s].",
+            trader.GET_req_fail % "transactions of typ.decide_func() by err_code [%s].",
         )
 
 
@@ -47,14 +47,14 @@ class type:
 
 
         if not len(sell_price):
-            return lowest_price >= C.crit_price * (1 + type.profit_ratio)
+            return lowest_price >= C.crit_price * (1 + typ.profit_ratio)
 
 
         avg_sell_price = sum(sell_price) / len(sell_price)
 
 
-        return lowest_price >= C.crit_price * (1 + type.profit_ratio) or \
-               avg_sell_price <= C.crit_price * (1 - type.loss_ratio)
+        return lowest_price >= C.crit_price * (1 + typ.profit_ratio) or \
+               avg_sell_price <= C.crit_price * (1 - typ.loss_ratio)
     
 
     @staticmethod
@@ -62,7 +62,7 @@ class type:
         sleep(randint(5, 20) * 60)
 
 
-class type01(type):
+class type01(typ):
 
     @staticmethod
     def sort_func(C: coin) -> int:
@@ -93,10 +93,10 @@ class type01(type):
         return coins[mid - n//2 : mid + n//2 + n % 2]
 
 
-class type02(type): pass
+class type02(typ): pass
 
 
-class type03(type):
+class type03(typ):
     @staticmethod
     def select_func(coins: list[coin], n: int) -> list[coin]:
         for C in coins:

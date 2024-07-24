@@ -2,7 +2,7 @@ class function:
     pass
 
 
-def check_request_success(response: dict, err_msg: str) -> dict | None:
+def check_request_success(response: dict, err_msg: str) -> dict:
     '''\nrequest를 보냈을 때 성공했는지 여부를 판단합니다. 만약 성공했다면 보낸 데이터를 그대로 보내지만, 실패했다면 주어진 error message로 Exception을 발생시킵니다.
     \nArgs:
         response: response.json() 데이터입니다.(Coinone 한정)

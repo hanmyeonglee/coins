@@ -59,7 +59,7 @@ class typ:
 
     @staticmethod
     def wait_func():
-        sleep(randint(120, 240) * 60)
+        sleep(randint(100, 200) * 60)
 
 
 class type01(typ):

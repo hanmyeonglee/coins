@@ -53,6 +53,7 @@ if __name__ == "__main__":
     except Exception:
         bt = traceback.format_exc()
         print(bt)
+    finally:
         print(Trader)
         print("process exited...")
         exit(0)

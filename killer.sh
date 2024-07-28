@@ -17,4 +17,7 @@ for PID in $PIDS; do
   kill -2 $PID
 done
 
+# nohup 파일 삭제
+rm /home/root/coins/nohup.out
+
 echo "Done."

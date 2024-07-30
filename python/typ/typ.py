@@ -11,6 +11,9 @@ class typ:
     profit_ratio = 0.005
     loss_ratio = 0.2
 
+    profit_money = 500
+    loss_money = 20000
+
     TRANS_size = 10
     CDL_size = 250
 
@@ -102,3 +105,46 @@ class type03(typ):
         for C in coins:
             if C.name == 'BTC':
                 return [C]
+
+class type04(type03):
+
+    profit_money = 1000
+
+    @staticmethod
+    def decide_func(C: coin):
+        orderbook = check_request_success(
+            requests.get(trader.ORDER_BOOK_CHK % C.name, headers=trader.headers).json(),
+            trader.GET_req_fail % "orderbook of typ.decide_func() by err_code [%s].",
+        )
+
+        transactions = check_request_success(
+            requests.get(trader.LAST_TRANSACTION_CHK % C.name, params={
+                'size': typ.TRANS_size,
+            }, headers=trader.headers).json(),
+            trader.GET_req_fail % "transactions of typ.decide_func() by err_code [%s].",
+        )
+
+
+        lowest_price = float(orderbook['bids'][-1]['price'])
+        sell_price = []
+        
+
+        for trans in transactions['transactions']:
+            if not trans['is_seller_maker']:
+                sell_price.append(float(trans['price']))
+
+
+        if not len(sell_price):
+            return lowest_price > C.crit_price + type04.profit_money
+
+
+        avg_sell_price = sum(sell_price) / len(sell_price)
+
+
+        return lowest_price >= C.crit_price + type04.profit_money or \
+               avg_sell_price <= C.crit_price * (1 - typ.loss_ratio)
+    
+
+    @staticmethod
+    def wait_func():
+        sleep(randint(5, 20) * 60)

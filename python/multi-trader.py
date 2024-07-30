@@ -15,6 +15,7 @@ type_selector = {
     'type01': type01,
     'type02': type02,
     'type03': type03,
+    'type04': type04,
 }
 
 

@@ -162,7 +162,7 @@ class trader:
         )
 
         total_qty = 0
-        before_bal = coin.total_qty * coin.crit_price
+        total_price = 0
 
 
         for order in order_book['bids'][::-1]:
@@ -177,6 +177,7 @@ class trader:
             
             selling_price = floor(qty * price, coin.min_info['price'])
 
+            total_price += selling_price
             self.balance += selling_price
             total_qty += qty
 
@@ -185,9 +186,10 @@ class trader:
                 self.current_dealing_coins.remove(coin)
                 break
 
+        crit_price = total_price / total_qty
 
         print(
-            "Trader: sells %s by qty %f and profit %f." % (coin.name, total_qty, self.balance - before_bal)
+            "Trader: sells %s by qty %f and profit %f." % (coin.name, total_qty, crit_price)
         )
 
 

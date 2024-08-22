@@ -44,6 +44,10 @@ def main(name:str, balance: float, n: int, main_type: typ):
             print('connection error...')
             sleep(10)
             continue
+        except requests.JSONDecodeError:
+            print('JSON Error...')
+            sleep(10)
+            continue
 
 
 if __name__ == "__main__":
